@@ -65,6 +65,7 @@ angular.module('starter.controllers', [])
             dayStart[7] = new Date();
             dayEnd[7] = new Date();
 
+
             dayStart[0].getFullYear(); dayStart[0].getMonth(); dayStart[0].setDate(24); dayStart[0].setHours(10); dayStart[0].setMinutes(5);
             dayEnd[0].getFullYear(); dayEnd[0].getMonth(); dayEnd[0].setDate(24); dayEnd[0].setHours(11); dayEnd[0].setMinutes(0);
             dayStart[1].getFullYear(); dayStart[1].getMonth(); dayStart[1].setDate(25); dayStart[1].setHours(9); dayStart[1].setMinutes(1);
@@ -83,6 +84,7 @@ angular.module('starter.controllers', [])
 
             dayStart[7].getUTCFullYear(); dayStart[7].getMonth(); dayStart[7].setDate(28); dayStart[7].setHours(12); dayStart[7].setMinutes(30);
             dayEnd[7].getUTCFullYear(); dayEnd[7].getMonth(); dayEnd[7].setDate(28); dayEnd[7].setHours(1); dayEnd[7].setMinutes(30);
+
 
 
 
@@ -147,8 +149,23 @@ angular.module('starter.controllers', [])
   $scope.chat = Chats.get($stateParams.chatId);
 })
 
-.controller('AccountCtrl', function($scope) {
-  $scope.settings = {
-    enableFriends: true
-  };
+.controller('AccountCtrl', function($scope, $window, $timeout) {
+    $scope.calculateDimensions = function(gesture) {
+    $scope.dev_width = $window.innerWidth;
+    $scope.dev_height = $window.innerHeight;
+  }
+  angular.element($window).bind('resize', function(){
+    $scope.$apply(function() {
+      $scope.calculateDimensions();  
+    })       
+  });
+    
+  $scope.calculateDimensions();  
+  $scope.getCal = $timeout(function(){ var elt = document.getElementById('calculator');
+    var calculator = Desmos.GraphingCalculator(elt);
+    calculator.setExpression({id:'graph1', latex:'y=x^2'});
+   }, 5000);
+
+  
+
 });

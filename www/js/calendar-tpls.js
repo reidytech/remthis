@@ -12,7 +12,7 @@ angular.module('ui.rCalendar', ['ui.rCalendar.tpls'])
         showEventDetail: true,
         startingDayMonth: 0,
         startingDayWeek: 0,
-        allDayLabel: 'Unit',
+        allDayLabel: '',
         noEventsLabel: 'No Events',
         eventSource: null,
         queryMode: 'local',
@@ -767,7 +767,7 @@ angular.module('ui.rCalendar', ['ui.rCalendar.tpls'])
                         for (var day = 0; day < 7; day += 1) {
                             time = new Date(startTime.getTime());
                             time.setHours(currentHour + hour);
-                            time.setDate(currentDate + day);
+                            time.setDate(currentDate + day);             
                             row.push({
                                 time: time
                             });
@@ -887,7 +887,6 @@ angular.module('ui.rCalendar', ['ui.rCalendar.tpls'])
                                     startIndex: allDayStartIndex,
                                     endIndex: allDayEndIndex
                                 };
-
                                 eventSet = dates[allDayStartIndex].events;
                                 if (eventSet) {
                                     eventSet.push(displayAllDayEvent);
